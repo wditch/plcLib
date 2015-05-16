@@ -1,4 +1,4 @@
-# Syntax highlighting for plcLib
+﻿# Syntax highlighting for plcLib
 
 # Command names - KEYWORD2
 setupPLC	KEYWORD2
@@ -25,6 +25,7 @@ reset	KEYWORD2
 Shift	KEYWORD2
 Counter	KEYWORD2
 Stack	KEYWORD2
+Pulse	KEYWORD2
 
 # Library name - KEYWORD1
 plcLib	KEYWORD1
@@ -49,6 +50,11 @@ push	KEYWORD1
 pop	KEYWORD1
 orBlock	KEYWORD1
 andBlock	KEYWORD1
+
+#Pulse methods - KEYWORD1
+inClock	KEYWORD1
+rising	KEYWORD1
+falling	KEYWORD1
 
 # Pin names and variables - LITERAL1
 X0	LITERAL1

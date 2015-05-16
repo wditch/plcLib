@@ -1,5 +1,5 @@
 /*
-  plcLib Version 1.0, last updated 23rd December, 2014.
+  plcLib Version 1.1.0, last updated 16 May, 2015.
   
   A simple Programmable Logic Controller (PLC) library for the
   Arduino and compatibles.
@@ -450,30 +450,32 @@ unsigned int timerOn(unsigned long &timerState, unsigned long timerPeriod) {
 		}
 	}
 	return(scanValue);										// Return result (1 = 'finished',
-															// 0 = 'not started' / 'not finished')
+                                                            // 0 = 'not started' / 'not finished')
 }
 
 unsigned int timerPulse(unsigned long &timerState, unsigned long timerPeriod) {
-	if (scanValue == 0 & timerState == 0) {					// timer is either not triggered or finished
-		timerState = 0;										// Clear timerState (0 = 'not started')
-	}
-	else {													// Timer is enabled
+	if (scanValue == 1 || timerState != 0){					// Timer is enabled
 		if (timerState == 0) {								// Timer hasn't started counting yet
 			timerState = millis();							// Set timerState to current time in milliseconds
-			scanValue = 0;									// Result = 'not finished' (0)
+			scanValue = 1;									// Pulse = 'Active' (1)
 		}
 		else {												// Timer is active and counting
 			if (millis() > (timerState + timerPeriod)) {	// Timer has finished
-				scanValue = 0;								// Pulse = 'finished' (0)
-				timerState = 0;
+			    if (scanValue == 0) {                       // Finished AND trigger is low
+				    timerState = 0;							// Re-enabled timer
+					scanValue = 0;							// Pulse = 'finished' (0)
+				}
+				else {                                      // Finished but trigger is still high
+					scanValue = 0;                          // Wait for trigger to go low before re-enabling
+				}
 			}
 			else {											// Timer has not finished
 				scanValue = 1;								// Pulse = 'Active' (1)
 			}
 		}
 	}
-	return(scanValue);										// Return result (1 = 'finished',
-															// 0 = 'not started' / 'not finished')
+	return(scanValue);										// Return result (1 = 'active',
+															// 0 = 'not started' / 'not yet re-enabled')
 }
 
 unsigned int timerOff(unsigned long &timerState, unsigned long timerPeriod) {
@@ -886,4 +888,42 @@ void Stack::andBlock()				// AND scanValue with value Popped from stack method
 {
 	scanValue = scanValue & bitRead(_sreg, 31);	// AND scanValue with top of stack
 	_sreg = _sreg << 1;				// Shift stack 1-bit to the left
+}
+
+// Single scan cycle Pulse with rising or falling edge detection
+Pulse::Pulse()						// Pulse constructor method
+{
+	_pulseInput = 0;				// Set pulse input tracker to zero
+	_pulseUpEdge = 0;				// Prepare rising edge detect
+	_pulseDownEdge = 0;				// Prepare falling edge detect
+}
+
+void Pulse::inClock()				// Read the clock input method
+{
+	if (scanValue != _pulseInput) {	// Rising or falling edge detected
+		if (scanValue == 1) {		// Rising edge detected
+			_pulseUpEdge = 1;		// Set rising edge detect value
+			_pulseDownEdge = 0;		// Clear falling edge detect value
+			_pulseInput = 1;		// Pulse input tracker = 1
+		}
+		else {						// Falling edge detected
+			_pulseUpEdge = 0;		// Clear rising edge detect value
+			_pulseDownEdge = 1;		// Set falling edge detect value
+			_pulseInput = 0;		// Pulse input tracker = 0
+		}
+	}
+	else {							// No change detected
+	_pulseUpEdge = 0;				// Set both edge detect values to zero
+	_pulseDownEdge = 0;				// (and leave pulse tracker unchanged)
+	}
+}
+
+void Pulse::rising()		        // Pulse rising edge detected method
+{
+	scanValue = _pulseUpEdge;		// scanValue = 1 if rising edge detected, 0 otherwise
+}
+
+void Pulse::falling()		        // Pulse falling edge detected method
+{
+	scanValue = _pulseDownEdge;		// scanValue = 1 if falling edge detected, 0 otherwise
 }
