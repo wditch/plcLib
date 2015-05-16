@@ -1,5 +1,5 @@
 /*
-  plcLib Version 1.0, last updated 23rd December, 2014.
+  plcLib Version 1.1.0, last updated 16 May, 2015.
   
   A simple Programmable Logic Controller (PLC) library for the
   Arduino and compatibles.
@@ -35,6 +35,7 @@ const int Y1 = 5;
 const int Y2 = 6;
 const int Y3 = 9;
 
+// Define Motor Shield pin names
 const int DIRA = 12;
 const int DIRB = 13;
 const int PWMA = 3;
@@ -162,6 +163,19 @@ class Stack
 	void andBlock();
   private:
 	unsigned long _sreg;
+};
+
+class Pulse
+{
+  public:
+    Pulse();
+	void inClock();
+	void rising();
+	void falling();
+  private:
+	unsigned int _pulseInput;
+	unsigned int _pulseUpEdge;
+	unsigned int _pulseDownEdge;
 };
 
 #endif
