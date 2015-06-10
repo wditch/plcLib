@@ -441,7 +441,7 @@ unsigned int timerOn(unsigned long &timerState, unsigned long timerPeriod) {
 			scanValue = 0;									// Result = 'not finished' (0)
 		}
 		else {												// Timer is active and counting
-			if (millis() > (timerState + timerPeriod)) {	// Timer has finished
+			if ((millis() - timerState) >= timerPeriod) {	// Timer has finished
 				scanValue = 1;								// Result = 'finished' (1)
 			}
 			else {											// Timer has not finished
@@ -460,7 +460,7 @@ unsigned int timerPulse(unsigned long &timerState, unsigned long timerPeriod) {
 			scanValue = 1;									// Pulse = 'Active' (1)
 		}
 		else {												// Timer is active and counting
-			if (millis() > (timerState + timerPeriod)) {	// Timer has finished
+			if ((millis() - timerState) >= timerPeriod) {	// Timer has finished
 			    if (scanValue == 0) {                       // Finished AND trigger is low
 				    timerState = 0;							// Re-enabled timer
 					scanValue = 0;							// Pulse = 'finished' (0)
@@ -483,7 +483,7 @@ unsigned int timerOff(unsigned long &timerState, unsigned long timerPeriod) {
 		if (timerState == 0) {								// Timer is not started so do nothing
 		}
 		else {												// Timer is active and counting
-			if (millis() > (timerState + timerPeriod)) {	// Timer has finished
+			if ((millis() - timerState) >= timerPeriod) {	// Timer has finished
 				scanValue = 0;								// Result = 'turn-off delay finished' (0)
 			}
 			else {											// Timer has not finished
@@ -508,7 +508,7 @@ unsigned int timerCycle(unsigned long &timer1State, unsigned long timer1Period, 
 			if (timer1State == 1) {							// LOW pulse period starting
 				timer1State = millis();						// Set timerState to current time in milliseconds
 			}
-			else if (millis() > (timer1State + timer1Period)) {	// Low pulse period has finished
+			else if ((millis() - timer1State) >= timer1Period) {	// Low pulse period has finished
 				timer1State = 0;	
 				timer2State = 1;							// Ready to start HIGH pulse period
 			}
@@ -518,7 +518,7 @@ unsigned int timerCycle(unsigned long &timer1State, unsigned long timer1Period, 
 			if (timer2State == 1) {							// HIGH pulse period starting
 				timer2State = millis();						// Set timerState to current time in milliseconds
 			}
-			else if (millis() > (timer2State + timer2Period)) {	// High pulse has finished
+			else if ((millis() - timer2State) >= timer2Period) {	// High pulse has finished
 				timer2State = 0;	
 				timer1State = 1;							// Ready to start LOW pulse period
 			}
