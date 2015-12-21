@@ -5,9 +5,9 @@
    Comparator - Maximum / minimum test using fixed threshold values
 
    Connections:
-   Analogue Input - potentiometer connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Digital Output - 'High' LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
-   Digital Output - 'Low' LED connected to output Y1 (Arduino pin 5 / Tinkerkit O4)
+   Analogue Input - potentiometer connected to input X0 (Arduino pin A0)
+   Digital Output - 'High' LED connected to output Y0 (Arduino pin 3)
+   Digital Output - 'Low' LED connected to output Y1 (Arduino pin 5)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

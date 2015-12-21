@@ -5,11 +5,11 @@
    NAND, NOR, and XNOR - Boolean Logic functions with inverted outputs
 
    Connections:
-   Input - switch connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Input - switch connected to input X1 (Arduino pin A1 / Tinkerkit pin I1)
-   Output - NAND Output - LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
-   Output - NOR Output - LED connected to output Y1 (Arduino pin 5 / Tinkerkit O4)
-   Output - XNOR Output - LED connected to output Y2 (Arduino pin 6 / Tinkerkit O3)
+   Input - switch connected to input X0 (Arduino pin A0)
+   Input - switch connected to input X1 (Arduino pin A1)
+   Output - NAND Output - LED connected to output Y0 (Arduino pin 3)
+   Output - NOR Output - LED connected to output Y1 (Arduino pin 5)
+   Output - XNOR Output - LED connected to output Y2 (Arduino pin 6)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

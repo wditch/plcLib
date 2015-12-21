@@ -5,9 +5,9 @@
    Set or reset an output using edge-triggered inputs
 
    Connections:
-   Set input - switch connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Reset input - switch connected to input X1 (Arduino pin A1 / Tinkerkit pin I1)
-   Latched output - LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
+   Set input - switch connected to input X0 (Arduino pin A0)
+   Reset input - switch connected to input X1 (Arduino pin A1)
+   Latched output - LED connected to output Y0 (Arduino pin 3)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

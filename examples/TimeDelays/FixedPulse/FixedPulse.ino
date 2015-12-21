@@ -5,8 +5,8 @@
    Fixed Pulse - Activates an output for a fixed period after a momentary input is applied
 
    Connections:
-   Input - switch connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Output with 2 s pulse - LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
+   Input - switch connected to input X0 (Arduino pin A0)
+   Output with 2 s pulse - LED connected to output Y0 (Arduino pin 3)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/
