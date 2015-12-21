@@ -5,8 +5,8 @@
    Bare Minimum - Single bit digital input and output
 
    Connections:
-   Input - switch connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Output - LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
+   Input - switch connected to input X0 (Arduino pin A0)
+   Output - LED connected to output Y0 (Arduino pin 3)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

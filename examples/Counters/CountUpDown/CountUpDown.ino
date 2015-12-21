@@ -5,12 +5,12 @@
    Up-down Counter - Counts up or down in the range 0-10
 
    Connections:
-   Count up input - switch connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Count down input - switch connected to input X1 (Arduino pin A1 / Tinkerkit pin I1)
-   Clear input - switch connected to input X2 (Arduino pin A2 / Tinkerkit pin I2)
-   Preset input - switch connected to input X3 (Arduino pin A3 / Tinkerkit pin I3)
-   Lower Q output - LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
-   Upper Q output - LED connected to output Y1 (Arduino pin 5 / Tinkerkit O4)
+   Count up input - switch connected to input X0 (Arduino pin A0)
+   Count down input - switch connected to input X1 (Arduino pin A1)
+   Clear input - switch connected to input X2 (Arduino pin A2)
+   Preset input - switch connected to input X3 (Arduino pin A3)
+   Lower Q output - LED connected to output Y0 (Arduino pin 3)
+   Upper Q output - LED connected to output Y1 (Arduino pin 5)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

@@ -5,9 +5,9 @@
    Generate rising-edge and falling-edge pulses using a digital input
 
    Connections:
-   Clock input - switch connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Rising-edge output - LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
-   Falling-edge output - LED connected to output Y1 (Arduino pin 5 / Tinkerkit O4)
+   Clock input - switch connected to input X0 (Arduino pin A0)
+   Rising-edge output - LED connected to output Y0 (Arduino pin 3)
+   Falling-edge output - LED connected to output Y1 (Arduino pin 5)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

@@ -1,5 +1,5 @@
 /*
-  plcLib Version 1.1.0, last updated 16 May, 2015.
+  plcLib Version 1.2.0, last updated 21 December, 2015.
   
   A simple Programmable Logic Controller (PLC) library for the
   Arduino and compatibles.
@@ -25,8 +25,9 @@
 extern unsigned int scanValue = 0;
 
 // Define default pin directions and initial output levels.
+// (or leave these unconfigured if noPinDefs is set in the user sketch)
 void setupPLC() {
-
+    #ifndef noPinDefs
 	// Basic input pins
 	pinMode(X0, INPUT);
 	pinMode(X1, INPUT);
@@ -80,6 +81,7 @@ void setupPLC() {
 	digitalWrite(PWMB, LOW);
 	digitalWrite(BRAKEA, LOW);		// Channel A Brake off
 	digitalWrite(BRAKEB, LOW);		// Channel B Brake off
+	#endif
 }
 
 // Read an input pin (pin number supplied as integer)
@@ -430,7 +432,8 @@ unsigned int latch(unsigned long &output, unsigned long reset) {
 	}
 	return(scanValue);
 }
-
+// On delay timer - requires continuously enabled input from previous scanValue
+// (timerState and timerPeriod are unsigned long values - 32 bit)
 unsigned int timerOn(unsigned long &timerState, unsigned long timerPeriod) {
 	if (scanValue == 0) {									// timer is disabled
 		timerState = 0;										// Clear timerState (0 = 'not started')
@@ -441,7 +444,7 @@ unsigned int timerOn(unsigned long &timerState, unsigned long timerPeriod) {
 			scanValue = 0;									// Result = 'not finished' (0)
 		}
 		else {												// Timer is active and counting
-			if (millis() > (timerState + timerPeriod)) {	// Timer has finished
+			if (millis() - timerState >= timerPeriod) {		// Timer has finished
 				scanValue = 1;								// Result = 'finished' (1)
 			}
 			else {											// Timer has not finished
@@ -453,6 +456,8 @@ unsigned int timerOn(unsigned long &timerState, unsigned long timerPeriod) {
                                                             // 0 = 'not started' / 'not finished')
 }
 
+// Fixed width pulse - enabled by momentary input from previous scanValue 
+// (timerState and timerPeriod are unsigned long values - 32 bit)
 unsigned int timerPulse(unsigned long &timerState, unsigned long timerPeriod) {
 	if (scanValue == 1 || timerState != 0){					// Timer is enabled
 		if (timerState == 0) {								// Timer hasn't started counting yet
@@ -460,7 +465,7 @@ unsigned int timerPulse(unsigned long &timerState, unsigned long timerPeriod) {
 			scanValue = 1;									// Pulse = 'Active' (1)
 		}
 		else {												// Timer is active and counting
-			if (millis() > (timerState + timerPeriod)) {	// Timer has finished
+			if (millis() - timerState >= timerPeriod) {		// Timer has finished
 			    if (scanValue == 0) {                       // Finished AND trigger is low
 				    timerState = 0;							// Re-enabled timer
 					scanValue = 0;							// Pulse = 'finished' (0)
@@ -477,13 +482,14 @@ unsigned int timerPulse(unsigned long &timerState, unsigned long timerPeriod) {
 	return(scanValue);										// Return result (1 = 'active',
 															// 0 = 'not started' / 'not yet re-enabled')
 }
-
+// Off delay timer - turns on immediately when enabled, then delays turning off when previous scanValue goes low
+// (timerState and timerPeriod are unsigned long values - 32 bit)
 unsigned int timerOff(unsigned long &timerState, unsigned long timerPeriod) {
 	if (scanValue == 0) {									// Timer input is off (scanValue = 0)
 		if (timerState == 0) {								// Timer is not started so do nothing
 		}
 		else {												// Timer is active and counting
-			if (millis() > (timerState + timerPeriod)) {	// Timer has finished
+			if (millis() - timerState >= timerPeriod) {		// Timer has finished
 				scanValue = 0;								// Result = 'turn-off delay finished' (0)
 			}
 			else {											// Timer has not finished
@@ -498,6 +504,8 @@ unsigned int timerOff(unsigned long &timerState, unsigned long timerPeriod) {
 															// 0 = 'not started' / 'finished')
 }
 
+// Cycle timer - creates a repeating pulse waveform when enabled by previous scanValue
+// (timer1State, timer1Period, timer2State, timer2Period are unsigned long values - 32 bit)
 unsigned int timerCycle(unsigned long &timer1State, unsigned long timer1Period, unsigned long &timer2State, unsigned long timer2Period) {
 	if (scanValue == 0) {									// Enable input is off (scanValue = 0)
 		timer2State = 0;									// Ready to start LOW pulse period when enabled
@@ -508,7 +516,7 @@ unsigned int timerCycle(unsigned long &timer1State, unsigned long timer1Period, 
 			if (timer1State == 1) {							// LOW pulse period starting
 				timer1State = millis();						// Set timerState to current time in milliseconds
 			}
-			else if (millis() > (timer1State + timer1Period)) {	// Low pulse period has finished
+			else if (millis() - timer1State >= timer1Period) {	// Low pulse period has finished
 				timer1State = 0;	
 				timer2State = 1;							// Ready to start HIGH pulse period
 			}
@@ -518,7 +526,7 @@ unsigned int timerCycle(unsigned long &timer1State, unsigned long timer1Period, 
 			if (timer2State == 1) {							// HIGH pulse period starting
 				timer2State = millis();						// Set timerState to current time in milliseconds
 			}
-			else if (millis() > (timer2State + timer2Period)) {	// High pulse has finished
+			else if (millis() - timer2State >= timer2Period) {	// High pulse has finished
 				timer2State = 0;	
 				timer1State = 1;							// Ready to start LOW pulse period
 			}

@@ -5,11 +5,11 @@
    Simple Alarm - A 3-input alarm circuit with a latched output and manual Reset input
 
    Connections:
-   Input - Sensor 0 - switch connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Input - Sensor 1 - switch connected to input X1 (Arduino pin A1 / Tinkerkit pin I1)
-   Input - Sensor 3 - switch connected to input X2 (Arduino pin A2 / Tinkerkit pin I2)
-   Input - Reset Alarm - switch connected to input X3 (Arduino pin A3 / Tinkerkit pin I3)
-   Output - Alarm Output - LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
+   Input - Sensor 0 - switch connected to input X0 (Arduino pin A0)
+   Input - Sensor 1 - switch connected to input X1 (Arduino pin A1)
+   Input - Sensor 3 - switch connected to input X2 (Arduino pin A2)
+   Input - Reset Alarm - switch connected to input X3 (Arduino pin A3)
+   Output - Alarm Output - LED connected to output Y0 (Arduino pin 3)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

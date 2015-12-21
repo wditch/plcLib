@@ -6,22 +6,22 @@
                    variable(s) to hold temporary calculation results
 
    Connections:
-   Input - switch connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Input - switch connected to input X1 (Arduino pin A1 / Tinkerkit pin I1)
-   Input - switch connected to input X2 (Arduino pin A2 / Tinkerkit pin I2)
-   Input - switch connected to input X3 (Arduino pin A3 / Tinkerkit pin I3)
-   Output - LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
+   Input - switch connected to input X0 (Arduino pin A0)
+   Input - switch connected to input X1 (Arduino pin A1)
+   Input - switch connected to input X2 (Arduino pin A2)
+   Input - switch connected to input X3 (Arduino pin A3)
+   Output - LED connected to output Y0 (Arduino pin 3)
 
    Equivalent Ladder Logic Circuit:
-   |                               |
-   |         X0    X1              |
-   |     |---| |---|/|---|         |
-   |     |               |   Y0    |
-   |-----|               |---( )---|
-   |     |   X2    X3    |         |
-   |     |---| |---| |---|         |
-   |                               |
-   |                               |
+   |                                |
+   |         X0    X1               |
+   |     |---| |---|/|---|          |
+   |     |               |    Y0    |
+   |-----|               |---(  )---|
+   |     |   X2    X3    |          |
+   |     |---| |---| |---|          |
+   |                                |
+   |                                |
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

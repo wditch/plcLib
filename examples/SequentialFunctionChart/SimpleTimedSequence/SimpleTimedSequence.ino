@@ -6,9 +6,9 @@
    
    Connections:
 
-   Output - LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
-   Output - LED connected to output Y1 (Arduino pin 5 / Tinkerkit O4)
-   Output - LED connected to output Y2 (Arduino pin 6 / Tinkerkit O3)
+   Output - LED connected to output Y0 (Arduino pin 3)
+   Output - LED connected to output Y1 (Arduino pin 5)
+   Output - LED connected to output Y2 (Arduino pin 6)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

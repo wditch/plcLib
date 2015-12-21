@@ -5,10 +5,10 @@
    Running Light Display - Timed Repeating Sequence
    
    Connections:
-   Output - Red LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
-   Output - Amber LED connected to output Y1 (Arduino pin 5 / Tinkerkit O4)
-   Output - Green LED connected to output Y2 (Arduino pin 6 / Tinkerkit O3)
-   Output - Blue LED connected to output Y3 (Arduino pin 9 / Tinkerkit O2)
+   Output - Red LED connected to output Y0 (Arduino pin 3)
+   Output - Amber LED connected to output Y1 (Arduino pin 5)
+   Output - Green LED connected to output Y2 (Arduino pin 6)
+   Output - Blue LED connected to output Y3 (Arduino pin 9)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

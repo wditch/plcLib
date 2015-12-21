@@ -1,5 +1,5 @@
 /*
-  plcLib Version 1.1.0, last updated 16 May, 2015.
+  plcLib Version 1.2.0, last updated 21 December, 2015.
   
   A simple Programmable Logic Controller (PLC) library for the
   Arduino and compatibles.
@@ -24,7 +24,9 @@
 
 #include "Arduino.h"
 
+#ifndef noPinDefs
 // Define basic I/O pins for Arduino Uno and compatibles
+// (or leave default I/O pins unconfigured if noPinDefs is set in the user sketch)
 const int X0 = A0;
 const int X1 = A1;
 const int X2 = A2;
@@ -55,6 +57,7 @@ const int Y4 = 4;
 const int Y5 = 7;
 const int Y6 = 8;
 const int Y7 = 12;
+#endif
 #endif
 
 void setupPLC();

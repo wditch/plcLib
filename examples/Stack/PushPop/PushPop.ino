@@ -5,14 +5,14 @@
    Push and Pop values from a single-bit software stack
 
    Connections:
-   Input - switch connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Input - switch connected to input X1 (Arduino pin A1 / Tinkerkit pin I1)
-   Input - switch connected to input X2 (Arduino pin A2 / Tinkerkit pin I2)
-   Input - switch connected to input X3 (Arduino pin A3 / Tinkerkit pin I3)
-   Output - LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
-   Output - LED connected to output Y1 (Arduino pin 5 / Tinkerkit O4)
-   Output - LED connected to output Y2 (Arduino pin 6 / Tinkerkit O3)
-   Output - LED connected to output Y3 (Arduino pin 9 / Tinkerkit O2)
+   Input - switch connected to input X0 (Arduino pin A0)
+   Input - switch connected to input X1 (Arduino pin A1)
+   Input - switch connected to input X2 (Arduino pin A2)
+   Input - switch connected to input X3 (Arduino pin A3)
+   Output - LED connected to output Y0 (Arduino pin 3)
+   Output - LED connected to output Y1 (Arduino pin 5)
+   Output - LED connected to output Y2 (Arduino pin 6)
+   Output - LED connected to output Y3 (Arduino pin 9)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/
@@ -45,7 +45,7 @@ void loop() {
                   // Remove 4 values from the stack and
                   // send to outputs in reverse order
                   // 1) X3->Y0, 2) X2->Y1, 3) X1->Y2, 4) X0->Y3
-                  // (a stack is a last-in first-out store)
+                  // (a stack is a last-in first-out or LIFO store)
 
   stack1.pop();   // Remove X3 value from the stack
   out(Y0);        // Send to Output 0

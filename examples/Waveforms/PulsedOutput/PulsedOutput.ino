@@ -5,8 +5,8 @@
    Pulsed Output - Creating a repeating pulse using the timerCycle command
 
    Connections:
-   Input - Enable input connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Output - Pulse Waveform on LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
+   Input - Enable input connected to input X0 (Arduino pin A0)
+   Output - Pulse Waveform on LED connected to output Y0 (Arduino pin 3)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

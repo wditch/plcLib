@@ -5,8 +5,8 @@
    Repeating pulse using a pair of linked on-delay timers
 
    Connections:
-   Input - switch connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Output - LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
+   Input - switch connected to input X0 (Arduino pin A0)
+   Output - LED connected to output Y0 (Arduino pin 3)
 
 
    Software and Documentation:

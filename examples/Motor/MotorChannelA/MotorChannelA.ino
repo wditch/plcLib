@@ -5,11 +5,11 @@
    Motor Channel A - Simple Motor Control on Arduino Motor Shield Channel A
 
    Connections:
-   Input - Speed - potentiometer connected to input X2 (Arduino pin A2 / Tinkerkit pin I2)
-   Input - Direction - switch connected to input X3 (Arduino pin A3 / Tinkerkit pin I3)
-   Output - Channel A Direction (DIRA) - Arduino pin D12
-   Output - Channel A PWM (PWMA) - Arduino pin D3
-   Output - Channel A Brake (BRAKEA) - Arduino pin D9
+   Input - Speed - potentiometer connected to input X2 (Arduino pin A2)
+   Input - Direction - switch connected to input X3 (Arduino pin A3)
+   Output - Channel A Direction (DIRA) - Arduino pin 12
+   Output - Channel A PWM (PWMA) - Arduino pin 3
+   Output - Channel A Brake (BRAKEA) - Arduino pin 9
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

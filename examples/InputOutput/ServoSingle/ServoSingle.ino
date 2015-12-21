@@ -6,8 +6,8 @@
    Single Servo - Controlling the position of a servo using a potentiometer 
 
    Connections:
-   Input - potentiometer connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Output - servo connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
+   Input - potentiometer connected to input X0 (Arduino pin A0)
+   Output - servo connected to output Y0 (Arduino pin 3)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

@@ -5,11 +5,11 @@
    Motor Channel B - Simple Motor Control on Arduino Motor Shield Channel B
 
    Connections:
-   Input - Speed - potentiometer connected to input X2 (Arduino pin A2 / Tinkerkit pin I2)
-   Input - Direction - switch connected to input X3 (Arduino pin A3 / Tinkerkit pin I3)
-   Output - Channel B Direction (DIRB) - Arduino pin D13
-   Output - Channel B PWM (PWMB) - Arduino pin D11
-   Output - Channel B Brake (BRAKEB) - Arduino pin D8
+   Input - Speed - potentiometer connected to input X2 (Arduino pin A2)
+   Input - Direction - switch connected to input X3 (Arduino pin A3)
+   Output - Channel B Direction (DIRB) - Arduino pin 13
+   Output - Channel B PWM (PWMB) - Arduino pin 11
+   Output - Channel B Brake (BRAKEB) - Arduino pin 8
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

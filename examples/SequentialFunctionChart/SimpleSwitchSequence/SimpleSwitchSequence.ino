@@ -5,10 +5,10 @@
    Simple Sequence - A Three step sequence with push button control
    
    Connections:
-   Input - switch connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Input - switch connected to input X1 (Arduino pin A1 / Tinkerkit pin I1)
-   Output - LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
-   Output - LED connected to output Y1 (Arduino pin 5 / Tinkerkit O4)
+   Input - switch connected to input X0 (Arduino pin A0)
+   Input - switch connected to input X1 (Arduino pin A1)
+   Output - LED connected to output Y0 (Arduino pin 3)
+   Output - LED connected to output Y1 (Arduino pin 5)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

@@ -5,14 +5,14 @@
    Down Counter - Counts 5 pulses on Input 0 with switch debounce
 
    Connections:
-   Count up input for counter 1 - switch connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Count down input for counter 2 - switch connected to input X1 (Arduino pin A1 / Tinkerkit pin I1)
-   Clear input for counters 1 and 2 - switch connected to input X2 (Arduino pin A2 / Tinkerkit pin I2)
-   Preset input for counters 1 and 2 - switch connected to input X3 (Arduino pin A3 / Tinkerkit pin I3)
-   Lower Q output for counter 1 - LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
-   Upper Q output for counter 1 - LED connected to output Y1 (Arduino pin 5 / Tinkerkit O4)
-   Lower Q output for counter 2 - LED connected to output Y2 (Arduino pin 6 / Tinkerkit O3)
-   Upper Q output for counter 2 - LED connected to output Y3 (Arduino pin 9 / Tinkerkit O2)
+   Count up input for counter 1 - switch connected to input X0 (Arduino pin A0)
+   Count down input for counter 2 - switch connected to input X1 (Arduino pin A1)
+   Clear input for counters 1 and 2 - switch connected to input X2 (Arduino pin A2)
+   Preset input for counters 1 and 2 - switch connected to input X3 (Arduino pin A3)
+   Lower Q output for counter 1 - LED connected to output Y0 (Arduino pin 3)
+   Upper Q output for counter 1 - LED connected to output Y1 (Arduino pin 5)
+   Lower Q output for counter 2 - LED connected to output Y2 (Arduino pin 6)
+   Upper Q output for counter 2 - LED connected to output Y3 (Arduino pin 9)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

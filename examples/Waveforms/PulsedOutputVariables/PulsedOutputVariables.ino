@@ -6,8 +6,8 @@
                    using variables to hold pulse low and pulse high times
 
    Connections:
-   Input - Enable input connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Output - Pulse Waveform on LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
+   Input - Enable input connected to input X0 (Arduino pin A0)
+   Output - Pulse Waveform on LED connected to output Y0 (Arduino pin 3)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/

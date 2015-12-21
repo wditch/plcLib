@@ -5,9 +5,9 @@
    Comparator - Less than test between two input pins
 
    Connections:
-   Analogue Input - potentiometer connected to input X0 (Arduino pin A0 / Tinkerkit pin I0)
-   Analogue Input - potentiometer connected to input X1 (Arduino pin A1 / Tinkerkit pin I1)
-   Digital Output - LED connected to output Y0 (Arduino pin 3 / Tinkerkit O5)
+   Analogue Input - potentiometer connected to input X0 (Arduino pin A0)
+   Analogue Input - potentiometer connected to input X1 (Arduino pin A1)
+   Digital Output - LED connected to output Y0 (Arduino pin 3)
 
    Software and Documentation:
    http://www.electronics-micros.com/software-hardware/plclib-arduino/
