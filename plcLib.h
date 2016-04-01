@@ -1,5 +1,5 @@
 /*
-  plcLib Version 1.2.0, last updated 21 December, 2015.
+  plcLib Version 1.3.0, last updated 1 April, 2016.
   
   A simple Programmable Logic Controller (PLC) library for the
   Arduino and compatibles.
@@ -23,6 +23,11 @@
 #define plcLib_h
 
 #include "Arduino.h"
+
+// Enable monitoring of inputs and outputs for serial monitor
+// (Increases code size but enables remote debugging via the serial port)
+#define monitorEnable
+// Comment out the above line to disable monitoring
 
 #ifndef noPinDefs
 // Define basic I/O pins for Arduino Uno and compatibles
@@ -57,8 +62,8 @@ const int Y4 = 4;
 const int Y5 = 7;
 const int Y6 = 8;
 const int Y7 = 12;
-#endif
-#endif
+#endif /* Additional pin definitions for Mega, Mega 2560 and Due) */
+#endif /* noPinDefs section is undefined */
 
 void setupPLC();
 unsigned int in(int input);
@@ -115,6 +120,8 @@ unsigned int set(unsigned long &output);
 unsigned int reset(int output);
 unsigned int reset(unsigned int &output);
 unsigned int reset(unsigned long &output);
+void pinStatusUpdate(int pin, byte type, unsigned int scanValue);
+void serialMonitor(char IoMap[]);
 
 class Counter
 {
@@ -181,4 +188,4 @@ class Pulse
 	unsigned int _pulseDownEdge;
 };
 
-#endif
+#endif /* plcLib_h is not defined */
