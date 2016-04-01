@@ -26,6 +26,8 @@ Shift	KEYWORD2
 Counter	KEYWORD2
 Stack	KEYWORD2
 Pulse	KEYWORD2
+serialMonitor	KEYWORD2
+pinStatusUpdate	KEYWORD2
 
 # Library name - KEYWORD1
 plcLib	KEYWORD1

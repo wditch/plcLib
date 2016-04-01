@@ -1,5 +1,5 @@
 /*
-  plcLib Version 1.2.0, last updated 21 December, 2015.
+  plcLib Version 1.3.0, last updated 1 April, 2016.
   
   A simple Programmable Logic Controller (PLC) library for the
   Arduino and compatibles.
@@ -23,6 +23,44 @@
 #include "plcLib.h"
 
 extern unsigned int scanValue = 0;
+
+// Define array size for pin monitoring
+#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) || defined(__SAM3X8E__)
+	#define maxPins 70                    // Set maxPins to 70 if Arduino Mega or Due are detected
+#else
+	#define maxPins 20                    // otherwise set maxPins to 20
+#endif                                    // maxPins value is returned by serial monitor P command
+
+// Define serial monitor status bit positions for pinStatusUpdate function (0=RHS, 7=LHS)
+#define pinUsedFlag 7                     // Value = 128 if active
+#define reportingEnabledFlag 6            // Value = 64 if active
+#define digitalInputFlag 5                // Value = 32 if active
+#define analogInputFlag 4                 // Value = 16 if active
+#define digitalOutputFlag 3               // Value = 8 if active
+#define analogOutputFlag 2                // Value = 4 if active
+#define servoOutputFlag 1                 // Value = 2 if active
+#define pinUpdatedFlag 0                  // Value = 1 if active
+
+// Define variables used by serial command monitor
+String serialCommand = "";                // Create text string for serial commands
+String serialCommandArgument = "";        // Create text string for serial command argument
+boolean serialCommandFlag = false;        // Flag to indicate a command is available
+boolean serialFirstRun = true;            // Flag to trigger serial Monitor initialisation
+String appName = "plcLib";                // Appname returned by serial monitor A command
+char appMajorVersion = '1';               // Major version returned by serial monitor M command
+char appMinorVersion = '3';               // Minor version returned by serial monitor m command
+
+// Create a 'struct' data type to hold serial monitor pin values
+typedef struct
+  {
+      byte statusValue = 0;
+      unsigned int previousValue = 0;
+  } pinValueType;
+
+// Initialise pin value struct
+pinValueType pinValue[maxPins];
+// Values can be accessed using pinValue[pin].statusValue
+// or pinValue[pin].previousValue
 
 // Define default pin directions and initial output levels.
 // (or leave these unconfigured if noPinDefs is set in the user sketch)
@@ -50,8 +88,9 @@ void setupPLC() {
 		pinMode(Y5, OUTPUT);
 		pinMode(Y6, OUTPUT);	
 		pinMode(Y7, OUTPUT);
-	#endif
-	
+		
+	#endif /* Additional pins for Mega, Mega 2560 and Due boards */
+
 	//Motor Shield pins
 	pinMode(DIRA, OUTPUT);
 	pinMode(DIRB, OUTPUT);
@@ -74,19 +113,22 @@ void setupPLC() {
 	digitalWrite(Y5, LOW);
 	digitalWrite(Y6, LOW);
 	digitalWrite(Y7, LOW);
-	#endif
+	#endif /* if defined Mega, Mega 2560 and Due */
 	digitalWrite(DIRA, LOW);
 	digitalWrite(DIRB, LOW);
 	digitalWrite(PWMA, LOW);
 	digitalWrite(PWMB, LOW);
 	digitalWrite(BRAKEA, LOW);		// Channel A Brake off
 	digitalWrite(BRAKEB, LOW);		// Channel B Brake off
-	#endif
+	#endif /* noPinDefs */
 }
 
 // Read an input pin (pin number supplied as integer)
 unsigned int in(int input) {
 	scanValue = digitalRead(input);
+	#ifdef monitorEnable
+	  pinStatusUpdate(input, digitalInputFlag, scanValue);		// pin number = input, type = digital input, command result = scanValue
+	#endif /* serial monitor is enabled */
 	return(scanValue);
 }
 
@@ -110,6 +152,9 @@ unsigned int inNot(int input) {
 	else {
 		scanValue = 1;
 	}
+	#ifdef monitorEnable
+	  pinStatusUpdate(input, digitalInputFlag, scanValue);		// pin number = input, type = digital input, command result = scanValue
+	#endif /* serial monitor is enabled */
 	return(scanValue);
 }
 
@@ -138,6 +183,9 @@ unsigned int inNot(unsigned long input) {
 // Read an analogue input (input pin supplied as an integer)
 unsigned int inAnalog(int input) {
 	scanValue = analogRead(input);
+	#ifdef monitorEnable
+	  pinStatusUpdate(input, analogInputFlag, scanValue);		// pin number = input, type = analogue input, command result = scanValue
+	#endif /* serial monitor is enabled */
 	return(scanValue);
 }
 
@@ -161,6 +209,9 @@ unsigned int out(int output) {
 	else {
 		digitalWrite(output, LOW);
 	}
+	#ifdef monitorEnable
+	  pinStatusUpdate(output, digitalOutputFlag, scanValue);		// pin number = output, type = digital output, command result = scanValue
+	#endif /* serial monitor is enabled */
 	return(scanValue);
 }
 
@@ -194,6 +245,9 @@ unsigned int outNot(int output) {
 	else {
 		digitalWrite(output, HIGH);
 	}
+	#ifdef monitorEnable
+	  pinStatusUpdate(output, digitalOutputFlag, scanValue);		// pin number = output, type = digital output, command result = scanValue
+	#endif /* serial monitor is enabled */
 	return(scanValue);
 }
 
@@ -222,6 +276,9 @@ unsigned int outNot(unsigned long &output) {
 // Output a PWM value to an output pin (scanValue in range 0-1023)
 unsigned int outPWM(int output) {
 	analogWrite(output, scanValue / 4);
+	#ifdef monitorEnable
+	  pinStatusUpdate(output, analogOutputFlag, scanValue);		// pin number = output, type = analogue output, command result = scanValue
+	#endif /* serial monitor is enabled */
 	return(scanValue);
 }
 
@@ -352,6 +409,9 @@ unsigned int latch(int output, int reset) {
 	else {
 		digitalWrite(output, LOW);
 	}
+	#ifdef monitorEnable
+	  pinStatusUpdate(output, digitalOutputFlag, scanValue);		// pin number = output, type = digital output, command result = scanValue
+	#endif /* serial monitor is enabled */
 	return(scanValue);
 }
 
@@ -365,6 +425,9 @@ unsigned int latch(int output, unsigned int reset) {
 	else {
 		digitalWrite(output, LOW);
 	}
+	#ifdef monitorEnable
+	  pinStatusUpdate(output, digitalOutputFlag, scanValue);		// pin number = output, type = digital output, command result = scanValue
+	#endif /* serial monitor is enabled */
 	return(scanValue);
 }
 
@@ -378,6 +441,9 @@ unsigned int latch(int output, unsigned long reset) {
 	else {
 		digitalWrite(output, LOW);
 	}
+	#ifdef monitorEnable
+	  pinStatusUpdate(output, digitalOutputFlag, scanValue);		// pin number = output, type = digital output, command result = scanValue
+	#endif /* serial monitor is enabled */
 	return(scanValue);
 }
 
@@ -608,6 +674,9 @@ unsigned int set(int output) {
 	if (scanValue == 1) {
 		digitalWrite(output, HIGH);
 	}
+	#ifdef monitorEnable
+	  pinStatusUpdate(output, digitalOutputFlag, scanValue);		// pin number = output, type = digital output, command result = scanValue
+	#endif /* serial monitor is enabled */
 	return(scanValue);
 }
 
@@ -634,6 +703,9 @@ unsigned int reset(int output) {
 	if (scanValue == 1) {
 		digitalWrite(output, LOW);
 	}
+	#ifdef monitorEnable
+	  pinStatusUpdate(output, digitalOutputFlag, scanValue);		// pin number = output, type = digital output, command result = scanValue
+	#endif /* serial monitor is enabled */
 	return(scanValue);
 }
 
@@ -934,4 +1006,113 @@ void Pulse::rising()		        // Pulse rising edge detected method
 void Pulse::falling()		        // Pulse falling edge detected method
 {
 	scanValue = _pulseDownEdge;		// scanValue = 1 if falling edge detected, 0 otherwise
+}
+
+// Serial monitor update pin status function
+void pinStatusUpdate(int pin, byte type, unsigned int scanValue)
+{
+	bitSet(pinValue[pin].statusValue, type);               // Set pin type
+	bitSet(pinValue[pin].statusValue, pinUsedFlag);        // Set pin used status bit
+	if (pinValue[pin].previousValue != scanValue) {        // If scanValue has changed then ...
+		pinValue[pin].previousValue = scanValue;           // update previousValue
+		if (bitRead(pinValue[pin].statusValue, reportingEnabledFlag)) {  // If reporting on pin is enabled then ...
+			bitSet(pinValue[pin].statusValue, pinUpdatedFlag);                // set pinUpdated flag
+		}
+	}
+}
+
+// Serial monitor function
+void serialMonitor(char IoMap[])
+{
+	if (serialFirstRun){                            // If running for the first time then
+		for (int x = 0; x < maxPins; x++){          // clear all pin values
+			pinValue[x].statusValue = 0;
+			pinValue[x].previousValue = 0;
+		}
+		serialFirstRun = false;
+	}
+
+	while (Serial.available()) {
+		char serialChar = (char)Serial.read();      // Read character from serial port
+		serialCommand += serialChar;                // Add character to command string
+		if (serialChar == '\n') {                   // Detect newline as end of command
+			serialCommandFlag = true;               // Set command available flag to True
+		}
+	}
+	if(serialCommandFlag){
+		boolean pinUpdated = false;                 // Local variable used by pin updated check (U command)
+		char serialCommandName = serialCommand[0];  // Read first character as command name
+		if (serialCommand.length() >= 1){
+			serialCommandArgument = serialCommand.substring(1);
+		}
+		else{
+			serialCommandArgument = "";
+		}
+		switch (serialCommandName) {
+			case 'A':                               // Command is "Read Application Name" - returns 'plcLib'
+			Serial.println(appName);
+			break;
+
+			case 'a':                               // Command is "Read IO Map Name" - returns value supplied as IoMap parameter
+			if(IoMap != ""){                        // to serial monitor command. E.g. serialMonitor("Basic");, or ...
+				Serial.println(IoMap);
+			}
+			else{
+				Serial.println("Default");          // returns "Default" if IoMap variable is an empty string
+			}
+			break;
+
+			case 'M':                               // Command is "Read Major Version" - returns 'x' if Version = x.y
+			Serial.println(appMajorVersion);
+			break;
+
+			case 'm':                               // Command is "Read Minor Version" - returns 'y' if Version = x.y
+			Serial.println(appMinorVersion);
+			break;
+
+			case 'P':                               // Command is "Read Maximum Number of Pins (returns 20 or 70 based on board detected)"
+			Serial.println(maxPins);                // Valid pin range is 0 to (maxPins-1)
+			break;
+
+			case 'S':                               // Command is "Read Status of Specified Pin - e.g S12"
+			Serial.println(pinValue[serialCommandArgument.toInt()].statusValue);
+			break;                                  // Note: No range check or other error detection is performed
+
+			case 'V':                               // Command is "Read Value of Specified Pin - e.g. V12"
+			Serial.println(pinValue[serialCommandArgument.toInt()].previousValue);
+			bitClear(pinValue[serialCommandArgument.toInt()].statusValue, pinUpdatedFlag);       // Clear pinUpdated flag
+			break;                                  // Note: No range check or other error detection is performed
+
+			case 'E':                               // Command is "Enable Status Updating of Specified Pin - e.g E12"
+			bitSet(pinValue[serialCommandArgument.toInt()].statusValue, reportingEnabledFlag);   // Set reportingEnabled flag
+			break;                                  // Note: No range check or other error detection is performed
+
+			case 'e':                               // Command is "Disable Status Updating of Specified Pin - e.g e12"
+			bitClear(pinValue[serialCommandArgument.toInt()].statusValue, reportingEnabledFlag); // Clear reportingEnabled flag
+			bitClear(pinValue[serialCommandArgument.toInt()].statusValue, pinUpdatedFlag);       // Clear pinUpdated flag
+			break;                                  // Note: No range check or other error detection is performed
+
+			case 'U':                               // Command is "Read list of updated pins (comma separated list)"
+			for(int x = 0; x < maxPins; x++){
+				if(bitRead(pinValue[x].statusValue, pinUpdatedFlag)){  // Updated pin found
+					if (pinUpdated == true){        // Not the first updated pin found
+						Serial.print(',');          // Print ',' as parameter separator
+					}
+					Serial.print(x);                // Print updated pin number
+					pinUpdated = true;
+				}
+			}
+			if(pinUpdated == false){
+				Serial.print('N');                  // Return 'N' if no pins have been updated since last check
+			}
+			Serial.println("");                     // Send newline at end
+			break;
+			
+			default:                                // Unknown command - returns '?'
+			Serial.println("?");
+		}
+		
+		serialCommand="";                           // Clear command string
+		serialCommandFlag = false;                  // Set command available flag to False
+	}
 }
