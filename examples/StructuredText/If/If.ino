@@ -13,7 +13,7 @@
    Output - LED connected to output Y0 (Arduino pin 3)
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
 
 */
 

@@ -13,7 +13,7 @@
    Output - Armed Output - LED connected to output Y1 (Arduino pin 5)
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
 
 */
 

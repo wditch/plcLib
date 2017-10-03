@@ -12,7 +12,7 @@
    Output - Channel A Brake (BRAKEA) - Arduino pin 9
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
 
 */
 

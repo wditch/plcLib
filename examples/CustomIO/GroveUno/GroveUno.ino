@@ -14,7 +14,7 @@
      D2 - D9
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
    
    Pin names A0 - A4 are defined automatically
 
@@ -32,10 +32,13 @@ const int D9 = 9;
 
 
 void setup() {
-  customIO();        // Setup inputs and outputs for Grove Base Shield
-}                    // (See IO tab for details)
+  customIO();          // Setup inputs and outputs for Grove Base Shield (See IO tab)
+  Serial.begin(9600);  // Enable serial port (needed for serial IO monitor)
+}
 
-void loop() {        // Sample code follows - replace as required
-  in(A0);            // Read Input A0 and send to Output D2
+void loop() {          // Sample code follows - replace as required
+  in(A0);              // Read Input A0 and send to Output D2
   out(D2);
+
+  serialMonitor("GroveUno");   // Enable remote I/O monitoring via the serial port
 }

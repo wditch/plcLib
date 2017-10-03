@@ -12,7 +12,7 @@
    Relay outputs connected to pins R0 to R15
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
    
 */
 
@@ -70,10 +70,13 @@ const int R14 = 36;
 const int R15 = 37;
 
 void setup() {
-  customIO();        // Setup inputs and outputs for Controllino PLC
-}                    // (See IO tab for details)
+  customIO();          // Setup inputs and outputs for Controllino PLC (See IO tab)
+  Serial.begin(9600);  // Enable serial port (needed for serial IO monitor)
+}
 
 void loop() {        // Sample code follows - replace as required
   in(A0);            // Read Input A0 and send to Output D0
   out(D0);
+
+  serialMonitor("ControllinoMegaPLC");   // Enable remote I/O monitoring via the serial port
 }

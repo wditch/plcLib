@@ -12,7 +12,7 @@
    Output - Channel B Brake (BRAKEB) - Arduino pin 8
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
 
 */
 

@@ -12,7 +12,7 @@
    Output - servo connected to output Y1 (Arduino pin 5)
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
 
 */
 
@@ -23,8 +23,8 @@ extern int scanValue;	// Link to scanValue defined in PLC library file
 
 void setup() {
   setupPLC();           // Setup inputs and outputs
-  servo1.attach(Y0);    // Attaches Servo 1 to Output 0
-  servo2.attach(Y1);    // Attaches Servo 2 to Output 1
+  servo1.attach(Y0);    // Attach Servo 1 to Output 0
+  servo2.attach(Y1);    // Attach Servo 2 to Output 1
 }
 
 void loop() {

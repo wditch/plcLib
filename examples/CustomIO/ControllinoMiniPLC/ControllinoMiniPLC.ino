@@ -11,7 +11,7 @@
    Outputs connected to pins D0 to D7
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
    
 */
 
@@ -32,12 +32,14 @@ const int D5 = 9;      // also connected to Relay 5
 const int D6 = A4;
 const int D7 = A5;
 
-
 void setup() {
-  customIO();        // Setup inputs and outputs for Controllino PLC
-}                    // (See IO tab for details)
+  customIO();          // Setup inputs and outputs for Controllino PLC (See IO tab)
+  Serial.begin(9600);  // Enable serial port (needed for serial IO monitor)
+}
 
 void loop() {        // Sample code follows - replace as required
   in(AN0);           // Read Input AN0 and send to Output D0
   out(D0);
+
+  serialMonitor("ControllinoMiniPLC");   // Enable remote I/O monitoring via the serial port
 }

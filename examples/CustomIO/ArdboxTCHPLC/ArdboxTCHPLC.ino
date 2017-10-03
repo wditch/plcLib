@@ -12,7 +12,7 @@
    Relay outputs connected to D12/R1 and D13/R2 (Arduino pins 12 and 13)
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
    
 */
 
@@ -30,17 +30,20 @@ const int D8 = 8;
 const int D9 = 9;
 const int D10 = 10;
 const int D11 = 11;
-const int D12 = 12;       // Relay 1
-const int D13 = 13;       // Relay 2
-const int R1 = 12;        // Relay 1
-const int R2 = 13;        // Relay 2
+const int D12 = 12;    // Relay 1
+const int D13 = 13;    // Relay 2
+const int R1 = 12;     // Relay 1
+const int R2 = 13;     // Relay 2
 
 
 void setup() {
-  customIO();        // Setup inputs and outputs for Ardbox PNP PLC
-}                    // (See IO tab for details)
+  customIO();          // Setup inputs and outputs for Ardbox PNP PLC (See IO tab)
+  Serial.begin(9600);  // Enable serial port (needed for serial IO monitor)
+}
 
-void loop() {        // Sample code follows - replace as required
-  in(A0);            // Read Input A0 and send to Output D2
+void loop() {          // Sample code follows - replace as required
+  in(A0);              // Read Input A0 and send to Output D2
   out(D2);
+
+  serialMonitor("ArdboxTCHPLC");   // Enable remote I/O monitoring via the serial port
 }

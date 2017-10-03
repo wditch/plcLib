@@ -21,7 +21,7 @@
      R21 - R24, R26 - R28 (D Zone)
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
    
 */
 
@@ -95,10 +95,13 @@ const int R27 = 48;
 const int R28 = 47;
 
 void setup() {
-  customIO();        // Setup inputs and outputs for Industrial Shields M-Duino 57R IO PLC
-}                    // (See IO tab for details)
+  customIO();          // Setup inputs and outputs for Industrial Shields M-Duino 57R IO PLC (See IO tab )
+  Serial.begin(9600);  // Enable serial port (needed for serial IO monitor)
+}
 
-void loop() {        // Sample code follows - replace as required
-  in(I00);           // Read Input I00 and send to Output Q00
+void loop() {          // Sample code follows - replace as required
+  in(I00);             // Read Input I00 and send to Output Q00
   out(Q00);
+
+  serialMonitor("MDuino57RelayPLC");   // Enable remote I/O monitoring via the serial port
 }

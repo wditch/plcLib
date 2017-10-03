@@ -1,11 +1,11 @@
 /*
-  plcLib Version 1.3.0, last updated 1 April, 2016.
+  plcLib Version 1.4.0, last updated 1 October, 2017.
   
   A simple Programmable Logic Controller (PLC) library for the
   Arduino and compatibles.
 
   Author:    W. Ditch
-  Publisher: www.electronics-micros.com
+             https://github.com/wditch/plcLib
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ boolean serialCommandFlag = false;        // Flag to indicate a command is avail
 boolean serialFirstRun = true;            // Flag to trigger serial Monitor initialisation
 String appName = "plcLib";                // Appname returned by serial monitor A command
 char appMajorVersion = '1';               // Major version returned by serial monitor M command
-char appMinorVersion = '3';               // Minor version returned by serial monitor m command
+char appMinorVersion = '4';               // Minor version returned by serial monitor m command
 
 // Create a 'struct' data type to hold serial monitor pin values
 typedef struct
