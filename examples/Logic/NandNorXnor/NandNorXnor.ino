@@ -12,7 +12,7 @@
    Output - XNOR Output - LED connected to output Y2 (Arduino pin 6)
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
 */
 
 void setup() {

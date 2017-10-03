@@ -16,7 +16,7 @@
          board due to the use of mechanical switch-based relay outputs.
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
 
 */
 
@@ -39,10 +39,13 @@
   const int R5 = 13;
 
 void setup() {
-  customIO();        // Setup inputs and outputs for Velleman IO Shield
-}                    // (See IO tab for details)
+  customIO();          // Setup inputs and outputs for Velleman IO Shield (See IO tab)
+  Serial.begin(9600);  // Enable serial port (needed for serial IO monitor)
+}
 
-void loop() {	     // Sample code follows - replace as required
-  in(D0);            // Read Digital Input 0
-  out(R0);           // Send to Relay Output 0 (Relay 1 of 6)
+void loop() {	       // Sample code follows - replace as required
+  in(D0);              // Read Digital Input 0
+  out(R0);             // Send to Relay Output 0 (Relay 1 of 6)
+
+  serialMonitor("VellemanIOShield");   // Enable remote I/O monitoring via the serial port
 }

@@ -14,7 +14,7 @@
      Q00 - Q07 (B Zone)
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
    
 */
 
@@ -45,10 +45,13 @@ const int Q07 = 6;
 
 
 void setup() {
-  customIO();        // Setup inputs and outputs for Industrial Shields M-Duino 21 IO PLC
-}                    // (See IO tab for details)
+  customIO();          // Setup inputs and outputs for Industrial Shields M-Duino 21 IO PLC (See IO tab)
+  Serial.begin(9600);  // Enable serial port (needed for serial IO monitor)
+}
 
-void loop() {        // Sample code follows - replace as required
-  in(I00);           // Read Input I00 and send to Output Q00
-  out(Q00);
+void loop() {          // Sample code follows - replace as required
+  in(I07);             // Read Input I07 and send to Output Q07
+  out(Q07);
+
+  serialMonitor("MDuino21PLC");   // Enable remote I/O monitoring via the serial port
 }

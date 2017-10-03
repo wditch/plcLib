@@ -11,7 +11,7 @@
    Outputs connected to pins D0 to D13 (Arduino pins 0-13)
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
    
 */
 
@@ -34,10 +34,13 @@ const int D13 = 13;
 
 
 void setup() {
-  customIO();        // Setup inputs and outputs for Ardbox PNP PLC
-}                    // (See IO tab for details)
+  customIO();          // Setup inputs and outputs for Ardbox PNP PLC (See IO tab)
+  Serial.begin(9600);  // Enable serial port (needed for serial IO monitor)
+}
 
-void loop() {        // Sample code follows - replace as required
-  in(A0);            // Read Input A0 and send to Output D2
+void loop() {          // Sample code follows - replace as required
+  in(A0);              // Read Input A0 and send to Output D2
   out(D2);
+
+  serialMonitor("ArdboxPNPPLC");   // Enable remote I/O monitoring via the serial port
 }

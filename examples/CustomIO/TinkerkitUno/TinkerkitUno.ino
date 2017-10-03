@@ -25,7 +25,7 @@
    Output - LED connected to output O5 (Arduino pin 3)
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
    
    The following pin definitions will not be needed if the TinkerKit library is
    loaded at the top of this file - otherwise uncomment the following lines
@@ -47,10 +47,13 @@ const int O5 = 3;
 */
 
 void setup() {
-  customIO();        // Setup inputs and outputs for TinkerKit Base Shield
-}                    // (See IO tab for details)
+  customIO();          // Setup inputs and outputs for TinkerKit Base Shield (See IO tab)
+  Serial.begin(9600);  // Enable serial port (needed for serial IO monitor)
+}
 
-void loop() {        // Sample code follows - replace as required
-  in(I0);            // Read Input 0 and send to Output 0
+void loop() {          // Sample code follows - replace as required
+  in(I0);              // Read Input 0 and send to Output 0
   out(O0);
+
+  serialMonitor("TinkerkitUno");   // Enable remote I/O monitoring via the serial port
 }

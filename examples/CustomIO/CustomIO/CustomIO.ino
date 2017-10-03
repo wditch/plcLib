@@ -23,9 +23,16 @@
    "pinMode(pin, mode)" command. Sample configuration code has been placed in
    the 'customIO' function which is available from the IO tab and called from 
    within the 'setup()' function below.
+   
+   To enable remote monitoring of inputs and outputs, begin by enabling the
+   serial port in the setup(); section. E.g. "Serial.begin(9600);"
+   
+   Next, include the serial monitor command in the loop() section. E.g.
+   
+        "serialMonitor("YourCircuitBoardNameHere");"
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
 
 */
 
@@ -33,8 +40,9 @@ unsigned int X1,Y1;        // Create variables X1 and Y1
 int X0=A0, Y0=3, Y2=6;     // Create X0, Y0 and Y2 as local pins
 
 void setup() {
-  customIO();              // Setup input and output pin directions
-}                          // (See IO tab for details)
+  customIO();              // Setup input and output pin directions (See IO tab)
+  Serial.begin(9600);  // Enable serial port (needed for serial IO monitor)
+}
 
 void loop() {
   in(X0);                  // Read pin A0
@@ -45,4 +53,6 @@ void loop() {
   
   in(Y1);                  // Read variable Y1
   out(Y2);                 // Output to pin 6
+
+  serialMonitor("YourCircuitBoardNameHere");   // Enable remote I/O monitoring via the serial port
 }

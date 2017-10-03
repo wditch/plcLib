@@ -11,7 +11,7 @@
    Output - Blue LED connected to output Y3 (Arduino pin 9)
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
 
    Sequential Function Chart
    

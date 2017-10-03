@@ -11,7 +11,7 @@
    with additional pins (22-49) configurable as required
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
    
    Pins A0-A15 are available automatically
 
@@ -35,10 +35,14 @@ const int D13 = 13;
 // Configure addional connections as required using pins 22-49
 
 void setup() {
-  customIO();        // Setup inputs and outputs for Arduino Mega or compatible
-}                    // (See IO tab for details)
+  customIO();          // Setup inputs and outputs for Arduino Mega or compatible (See IO tab)
+  Serial.begin(9600);  // Enable serial port (needed for serial IO monitor)
+}
 
-void loop() {        // Sample code follows - replace as required
-  in(A0);            // Read Input A0 and send to Output D2
+
+void loop() {          // Sample code follows - replace as required
+  in(A0);              // Read Input A0 and send to Output D2
   out(D2);
+
+  serialMonitor("Mega");   // Enable remote I/O monitoring via the serial port
 }

@@ -10,7 +10,7 @@
    Output - Q - LED connected to output Y0 (Arduino pin 3)
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
 
 */
 
@@ -25,7 +25,7 @@ void loop() {
   set(AUX0);           // Set AUX0 to 1 if X0 = 1, leave unaltered otherwise
 
   in(X1);              // Read switch connected to X1
-  unset(AUX0);         // Clear AUX0 to 0 if X1 = 1, leave unaltered otherwise
+  reset(AUX0);         // Clear AUX0 to 0 if X1 = 1, leave unaltered otherwise
   
   in(AUX0);            // Read auxiliary variable AUX0
   out(Y0);             // Output to Y0

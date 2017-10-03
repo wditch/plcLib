@@ -11,7 +11,7 @@
    Outputs connected to pins R1 to R8 and Q00 to Q01
 
    Software and Documentation:
-   http://www.electronics-micros.com/software-hardware/plclib-arduino/
+   https://github.com/wditch/plcLib
    
 */
 
@@ -37,10 +37,13 @@ const int Q00 = 5;
 const int Q01 = 6;
 
 void setup() {
-  customIO();        // Setup inputs and outputs for Ardbox Relay PLC
-}                    // (See IO tab for details)
+  customIO();          // Setup inputs and outputs for Ardbox Relay PLC (See IO tab)
+  Serial.begin(9600);  // Enable serial port (needed for serial IO monitor)
+}
 
-void loop() {        // Sample code follows - replace as required
-  in(I00);           // Read Input I00 and send to Output R1
+void loop() {          // Sample code follows - replace as required
+  in(I00);             // Read Input I00 and send to Output R1
   out(R1);
+
+  serialMonitor("ArdboxRelayPLC");   // Enable remote I/O monitoring via the serial port
 }
