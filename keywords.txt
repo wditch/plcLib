@@ -1,4 +1,4 @@
-﻿# Syntax highlighting for plcLib
+# Syntax highlighting for plcLib
 
 # Command names - KEYWORD2
 setupPLC	KEYWORD2
